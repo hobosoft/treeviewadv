@@ -653,7 +653,17 @@ namespace Aga.Controls.Tree
 			}
 		}
 
-		private bool _asyncExpanding;
+        //private MapTypeNodeControls _mapControls;
+        //[Browsable(false)]
+        //public Dictionary<Type, Collection<NodeControl>> NodeControlsMap
+        //{
+        //    get
+        //    {
+        //        return _mapControls;
+        //    }
+        //}
+
+        private bool _asyncExpanding;
 		/// <summary>
 		/// When set to true, node contents will be read in background thread.
 		/// </summary>

@@ -51,7 +51,20 @@ namespace Aga.Controls.Tree.NodeControls
 			}
 		}
 
-		private VerticalAlignment _verticalAlign = VerticalAlignment.Center;
+
+        private Type _toType;
+        public Type ToType
+        {
+            get { return _toType; }
+            set
+            {
+                _toType = value;
+                if (_parent != null)
+                    _parent.FullUpdate();
+            }
+        }
+
+        private VerticalAlignment _verticalAlign = VerticalAlignment.Center;
 		[DefaultValue(VerticalAlignment.Center)]
 		public VerticalAlignment VerticalAlign
 		{

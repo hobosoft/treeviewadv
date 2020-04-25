@@ -279,7 +279,7 @@ namespace Aga.Controls.Tree
 				{
 					for (int i = 0; i < _expandingNodes.Count; i++)
 					{
-						foreach (NodeControlInfo item in GetNodeControls(_expandingNodes[i]))
+						foreach (NodeControlInfo item in GetNodeControlInfos(_expandingNodes[i]))
 						{
 							if (item.Control is ExpandingIcon)
 							{
@@ -337,7 +337,7 @@ namespace Aga.Controls.Tree
 			Rectangle rect = _rowLayout.GetRowBounds(FirstVisibleRow);
 			point.Y += (rect.Y - ColumnHeaderHeight);
 			point.X += OffsetX;
-			foreach (NodeControlInfo info in GetNodeControls(node))
+			foreach (NodeControlInfo info in GetNodeControlInfos(node))
 				if (info.Bounds.Contains(point))
 					return info;
 
@@ -565,16 +565,16 @@ namespace Aga.Controls.Tree
 			FullUpdate();
 		}
 
-		internal IEnumerable<NodeControlInfo> GetNodeControls(TreeNodeAdv node)
+		internal IEnumerable<NodeControlInfo> GetNodeControlInfos(TreeNodeAdv node)
 		{
 			if (node == null)
 				yield break;
 			Rectangle rowRect = _rowLayout.GetRowBounds(node.Row);
-			foreach (NodeControlInfo n in GetNodeControls(node, rowRect))
+			foreach (NodeControlInfo n in GetNodeControlInfos(node, rowRect))
 				yield return n;
 		}
 
-		internal IEnumerable<NodeControlInfo> GetNodeControls(TreeNodeAdv node, Rectangle rowRect)
+		internal IEnumerable<NodeControlInfo> GetNodeControlInfos(TreeNodeAdv node, Rectangle rowRect)
 		{
 			if (node == null)
 				yield break;
@@ -599,8 +599,15 @@ namespace Aga.Controls.Tree
 
 			if (!UseColumns)
 			{
+                Type tagType = null;
+                if (node.Tag != null)
+                    tagType = node.Tag.GetType();
+
 				foreach (NodeControl c in NodeControls)
 				{
+                    if (c.ToType != null && tagType != c.ToType)
+                        continue;
+
 					Size s = c.GetActualSize(node, _measureContext);
 					if (!s.IsEmpty)
 					{
@@ -656,7 +663,24 @@ namespace Aga.Controls.Tree
 			return Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
 		}
 
-		public void FullUpdate()
+        //internal Collection<NodeControl> GetNodeControls(TreeNodeAdv node)
+        //{
+        //    Collection<NodeControl> nodeControls = null;
+
+        //    if (node.Tag != null && NodeControlsMap != null && NodeControlsMap.Count > 0)
+        //    {
+        //        Type type = node.Tag.GetType();
+
+        //        NodeControlsMap.TryGetValue(type, out nodeControls);
+        //    }
+
+        //    if (nodeControls == null)
+        //        nodeControls = NodeControls;
+
+        //    return nodeControls;
+        //}
+
+        public void FullUpdate()
 		{
 			HideEditor();
 			if (InvokeRequired)
@@ -929,7 +953,7 @@ namespace Aga.Controls.Tree
 		{
 			if (node.RightBounds == null)
 			{
-				Rectangle res = GetNodeBounds(GetNodeControls(node, Rectangle.Empty));
+				Rectangle res = GetNodeBounds(GetNodeControlInfos(node, Rectangle.Empty));
 				node.RightBounds = res.Right;
 			}
 			return node.RightBounds.Value;
@@ -937,7 +961,7 @@ namespace Aga.Controls.Tree
 
 		internal Rectangle GetNodeBounds(TreeNodeAdv node)
 		{
-			return GetNodeBounds(GetNodeControls(node));
+			return GetNodeBounds(GetNodeControlInfos(node));
 		}
 
 		private Rectangle GetNodeBounds(IEnumerable<NodeControlInfo> nodeControls)

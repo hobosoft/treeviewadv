@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using Aga.Controls.Tree.NodeControls;
+using System.Windows.Forms;
 
 namespace Aga.Controls.Tree
 {
@@ -56,5 +57,19 @@ namespace Aga.Controls.Tree
 			get { return _enabled; }
 			set { _enabled = value; }
 		}
-	}
+
+        private Color? _colorFore;
+        public Color ForeColor
+        {
+            get
+            {
+                if (_colorFore == null)
+                    _colorFore = Control.DefaultForeColor;
+
+                return _colorFore.Value;
+            }
+            set { _colorFore = value; }
+        }
+
+    }
 }

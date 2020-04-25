@@ -34,12 +34,22 @@ namespace SampleApp
 			_model = new TreeModel();
 			for (int i = 0; i < 10; i++)
 			{
-				_model.Root.Nodes.Add(new Node(i.ToString()));
+                Node node = new Node(i.ToString());
+                node.Image = Properties.Resources.P;
+
+                _model.Root.Nodes.Add(node);
 				for (int n = 0; n < 500; n++)
 				{
-					_model.Root.Nodes[i].Nodes.Add(new Node(n.ToString()));
+                    Node node1 = new Node(n.ToString());
+                    node1.Image = Properties.Resources.c1;
+                    node.Nodes.Add(node1);
 					for (int k = 0; k < 5; k++)
-						_model.Root.Nodes[i].Nodes[n].Nodes.Add(new Node(k.ToString()));
+                    {
+                        Node node2 = new Node(k.ToString());
+                        node2.Image = Properties.Resources.c2;
+                        node1.Nodes.Add(node2);
+
+                    }
 				}
 			}
 

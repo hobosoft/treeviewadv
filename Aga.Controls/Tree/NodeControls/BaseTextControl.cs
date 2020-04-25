@@ -231,13 +231,17 @@ namespace Aga.Controls.Tree.NodeControls
 			}
 			else if (context.DrawSelection == DrawSelectionMode.Inactive)
 			{
-				textColor = SystemColors.ControlText;
+                textColor = SystemColors.ControlText;
+                //textColor = context.ForeColor;
+
                 backgroundBrush = SystemBrushes.InactiveBorder;
 			}
 			else if (context.DrawSelection == DrawSelectionMode.FullRowSelect)
 				textColor = SystemColors.HighlightText;
+            else
+                textColor = context.ForeColor;
 
-			if (!context.Enabled)
+            if (!context.Enabled)
 				textColor = SystemColors.GrayText;
 
 			if (DrawTextMustBeFired(node))

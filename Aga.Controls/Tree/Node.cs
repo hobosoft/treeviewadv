@@ -181,7 +181,7 @@ namespace Aga.Controls.Tree
 		}
 
 		private Image _image;
-		public Image Image
+		public virtual Image Image
 		{
 			get { return _image; }
 			set 

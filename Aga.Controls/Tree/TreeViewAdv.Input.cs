@@ -59,7 +59,7 @@ namespace Aga.Controls.Tree
 				Input.KeyDown(e);
 				if (!e.Handled)
 				{
-					foreach (NodeControlInfo item in GetNodeControls(CurrentNode))
+					foreach (NodeControlInfo item in GetNodeControlInfos(CurrentNode))
 					{
 						item.Control.KeyDown(e);
 						if (e.Handled)
@@ -79,7 +79,7 @@ namespace Aga.Controls.Tree
 					ChangeInput();
 				if (!e.Handled)
 				{
-					foreach (NodeControlInfo item in GetNodeControls(CurrentNode))
+					foreach (NodeControlInfo item in GetNodeControlInfos(CurrentNode))
 					{
 						item.Control.KeyUp(e);
 						if (e.Handled)

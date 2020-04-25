@@ -124,6 +124,8 @@ namespace Aga.Controls.Tree
 			if (node.IsHidden) return;
 			context.DrawSelection = DrawSelectionMode.None;
 			context.CurrentEditorOwner = CurrentEditorOwner;
+            context.ForeColor = Control.DefaultForeColor;
+
 			if (DragMode)
 			{
 				if ((_dropPosition.Node == node) && _dropPosition.Position == NodePosition.Inside && HighlightDropPosition)
@@ -131,14 +133,17 @@ namespace Aga.Controls.Tree
 			}
 			else
 			{
-				if (node.IsSelected && (Focused || !InactiveSelection))
-					context.DrawSelection = DrawSelectionMode.Active;
-				else if (node.IsSelected && !Focused && !HideSelection)
-					context.DrawSelection = DrawSelectionMode.Inactive;
+                if (node.IsSelected && (Focused || !InactiveSelection))
+                    context.DrawSelection = DrawSelectionMode.Active;
+                else if (node.IsSelected && !Focused && !HideSelection)
+                    context.DrawSelection = DrawSelectionMode.Inactive;
+                else
+                    CheckNodeState(node, ref context);
 			}
+
 			context.DrawFocus = Focused && CurrentNode == node;
-			
-			OnRowDraw(e, node, context, row, rowRect);
+
+            OnRowDraw(e, node, context, row, rowRect);
 
 			if (FullRowSelect)
 			{
@@ -168,7 +173,12 @@ namespace Aga.Controls.Tree
 			DrawNode(node, context);
 		}
 
-		private void DrawVerticalGridLines(Graphics gr, int y)
+        protected virtual void CheckNodeState(TreeNodeAdv node, ref DrawContext context)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void DrawVerticalGridLines(Graphics gr, int y)
 		{
 			int x = 0;
 			foreach (TreeColumn c in Columns)
@@ -221,7 +231,7 @@ namespace Aga.Controls.Tree
 
 		public void DrawNode(TreeNodeAdv node, DrawContext context)
 		{
-			foreach (NodeControlInfo item in GetNodeControls(node))
+			foreach (NodeControlInfo item in GetNodeControlInfos(node))
 			{
 				if (item.Bounds.Right >= OffsetX && item.Bounds.X - OffsetX < this.Bounds.Width)// skip invisible nodes
 				{

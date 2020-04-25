@@ -74,7 +74,13 @@ namespace Aga.Controls.Tree.NodeControls
 		}
 	}
 
-	internal class NodeControlCollectionEditor : CollectionEditor
+    //internal class MapTypeNodeControls : Dictionary<Type, Collection<NodeControl>>
+    //{
+
+    //}
+
+
+    internal class NodeControlCollectionEditor : CollectionEditor
 	{
 		private Type[] _types;
 

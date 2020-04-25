@@ -70,6 +70,9 @@ namespace TestApp
 		}
 		private void button1_Click(object sender, EventArgs e)
 		{
+            if (this.treeViewAdv1.SelectedNode == null)
+                return;
+
 			Node n = (this.treeViewAdv1.SelectedNode.Tag as Node);
 			//n.Parent.Nodes.Remove(n);
 			n.IsHidden = !n.IsHidden;

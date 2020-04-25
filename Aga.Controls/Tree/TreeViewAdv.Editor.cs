@@ -116,7 +116,7 @@ namespace Aga.Controls.Tree
 
 		private void SetEditorBounds(EditorContext context)
 		{
-			foreach (NodeControlInfo info in GetNodeControls(context.CurrentNode))
+			foreach (NodeControlInfo info in GetNodeControlInfos(context.CurrentNode))
 			{
 				if (context.Owner == info.Control && info.Control is EditableControl)
 				{
