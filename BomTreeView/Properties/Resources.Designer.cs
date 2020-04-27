@@ -63,9 +63,29 @@ namespace TestBomTreeView.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap AO {
+            get {
+                object obj = ResourceManager.GetObject("AO", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Assembly {
             get {
                 object obj = ResourceManager.GetObject("Assembly", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap FO {
+            get {
+                object obj = ResourceManager.GetObject("FO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +156,16 @@ namespace TestBomTreeView.Properties {
         internal static System.Drawing.Bitmap ResourceList {
             get {
                 object obj = ResourceManager.GetObject("ResourceList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap TO {
+            get {
+                object obj = ResourceManager.GetObject("TO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -34,8 +34,10 @@ namespace TestBomTreeView
             this.NodeControls.Add(ctrlTB);
 
             NodeNumericUpDown ctrlNum = new NodeNumericUpDown();
-            //ctrlNum.LeftMargin = 1;
-            ctrlNum.DataPropertyName = "Count";
+			//ctrlNum.LeftMargin = 1;
+			ctrlNum.ToType = typeof(BomNode);
+			//ctrlNum.
+			ctrlNum.DataPropertyName = "Quantity";
             this.NodeControls.Add(ctrlNum);
 
             BomTreeModel model = new BomTreeModel();
@@ -134,7 +136,7 @@ namespace TestBomTreeView
 
         private void _tree_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
-            if (e.Control is NodeTextBox)
+            if (e.Node.Tag is BomNode)
                 MessageBox.Show(e.Node.Tag.ToString());
         }
 
@@ -147,11 +149,11 @@ namespace TestBomTreeView
         {
             if (node.Tag != null)
             {
-                if (node.Tag.GetType() == typeof(PartNode))
+                if (node.Tag.GetType() == typeof(BomNode))
                 {
-                    PartNode pnode = node.Tag as PartNode;
-                    if (pnode.Nodes.Count > 0 && pnode.Index % 2 == 0)
-                        context.ForeColor = Color.Red;
+					BomNode bnode = node.Tag as BomNode;
+					if (bnode.Assign == true)
+                        context.ForeColor = SystemColors.ControlLight;
                 }
             }
         }

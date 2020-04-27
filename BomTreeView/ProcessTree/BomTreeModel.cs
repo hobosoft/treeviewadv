@@ -35,28 +35,33 @@ namespace TestBomTreeView
 
         public bool InitModel()
         {
-            Node node = AddRoot(PPRNodeType.Product);
+			Node nodeProduct = new ProductNode("S-001");
+			this.Nodes.Add(nodeProduct);
+
+			Random random = new Random();
+			Node node = AddBomNode(nodeProduct, new BomLink(null, 1.0));
             for (int n = 0; n < 500; n++)
             {
-                Node child = AddProductChild(node);
+
+                Node child = AddBomNode(node, new BomLink(null, random.NextDouble() * 20));
                 for (int k = 0; k < 5; k++)
-                    AddProductChild(child);
+					AddBomNode(child, new BomLink(null, random.NextDouble() * 20));
             }
 
-            node = AddRoot(PPRNodeType.Product);
-            for (int n = 0; n < 500; n++)
+            node = node = AddBomNode(nodeProduct, new BomLink(null, 5.0));
+			for (int n = 0; n < 500; n++)
             {
-                Node child = AddProductChild(node);
+                Node child = AddBomNode(node, new BomLink(null, random.NextDouble() * 20));
                 for (int k = 0; k < 5; k++)
-                    AddProductChild(child);
+					AddBomNode(child, new BomLink(null, random.NextDouble() * 20));
             }
 
-            node = AddRoot(PPRNodeType.Product);
-            for (int n = 0; n < 500; n++)
+            node = node = AddBomNode(nodeProduct, new BomLink(null, 12.0));
+			for (int n = 0; n < 500; n++)
             {
-                Node child = AddProductChild(node);
+                Node child = AddBomNode(node, new BomLink(null, random.NextDouble() * 20));
                 for (int k = 0; k < 5; k++)
-                    AddProductChild(child);
+					AddBomNode(child, new BomLink(null, random.NextDouble() * 20));
             }
 
             this.NodesChanged += OnBomTreeModel_NodesChanged;
@@ -67,43 +72,14 @@ namespace TestBomTreeView
             return true;
         }
 
-        private Node AddRoot(PPRNodeType type)
+        private Node AddBomNode(Node parent, BomLink link)
         {
-            Node node = new PPRNode(type);
-            this.Nodes.Add(node);
-            return node;
-        }
-
-        private Node AddProductChild(Node parent)
-        {
-            Node node = new PartNode("Child Node " + parent.Nodes.Count.ToString());
-            parent.Nodes.Add(node);
-            return node;
-        }
-        private Node AddProcessChild(Node parent, ActivityType type)
-        {
-            int index = 0;
-            string text = "Process Node";
-            if (type == ActivityType.Procedure)
-            {
-                text = "Procedure Node";
-                index = (parent.Nodes.Count + 1) * 10;
-            }
-            else if (type == ActivityType.WorkStep)
-            {
-                text = "Work Step Node";
-                index = (parent.Nodes.Count + 1) * 5;
-            }
-            Node node = new ProcessNode(text, type, index);
+            Node node = new BomNode("Child Node " + parent.Nodes.Count.ToString(), link);
             parent.Nodes.Add(node);
             return node;
         }
 
-        private Node AddResourceChild(Node parent)
-        {
-            Node node = new ResourceNode("Resource Node " + parent.Nodes.Count.ToString());
-            parent.Nodes.Add(node);
-            return node;
-        }
     }
+
+
 }

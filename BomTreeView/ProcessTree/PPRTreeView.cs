@@ -25,7 +25,7 @@ namespace TestBomTreeView
 
         private void InitTree()
         {
-            NodeIcon ctrlIcon = new NodeIcon();
+			NodeIcon ctrlIcon = new NodeIcon();
             ctrlIcon.DataPropertyName = "Image";
             ctrlIcon.ToType = null;
             this.NodeControls.Add(ctrlIcon);

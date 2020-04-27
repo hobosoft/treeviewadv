@@ -57,6 +57,9 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProcessTree\BomNode.cs" />
+    <Compile Include="ProcessTree\ProductNode.cs" />
+    <Compile Include="ProcessTree\WorkOrderNode.cs" />
     <Compile Include="ProcessTree\BomTreeModel.cs" />
     <Compile Include="ProcessTree\BomTreeView.cs">
       <SubType>Component</SubType>
@@ -67,7 +70,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ProcessTree\ResourceNode.cs" />
-    <Compile Include="ProcessTree\ProcessNode.cs" />
+    <Compile Include="ProcessTree\ActivityNode.cs" />
     <Compile Include="ProcessTree\PPRNode.cs" />
     <Compile Include="ProcessTree\PartNode.cs" />
     <Compile Include="PPRTreeForm.cs">
@@ -148,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Assembly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\to.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

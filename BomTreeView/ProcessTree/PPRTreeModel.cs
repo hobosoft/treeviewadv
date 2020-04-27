@@ -35,7 +35,10 @@ namespace TestBomTreeView
 
         public bool InitModel()
         {
-            Node node = AddRoot(PPRNodeType.Product);
+			WorkOrderNode woNode = new WorkOrderNode("AO-0001-0000", WorkOrderType.AO);
+			this.Nodes.Add(woNode);
+
+			Node node = AddPPRNode(woNode, PPRNodeType.Product);
             for (int n = 0; n < 500; n++)
             {
                 Node child = AddProductChild(node);
@@ -43,7 +46,7 @@ namespace TestBomTreeView
                     AddProductChild(child);
             }
 
-            node = AddRoot(PPRNodeType.Process);
+            node = AddPPRNode(woNode, PPRNodeType.Process);
             for (int n = 0; n < 500; n++)
             {
                 Node child = AddProcessChild(node, ActivityType.Procedure);
@@ -51,7 +54,7 @@ namespace TestBomTreeView
                     AddProcessChild(child, ActivityType.WorkStep);
             }
 
-            node = AddRoot(PPRNodeType.Resource);
+            node = AddPPRNode(woNode, PPRNodeType.Resource);
             for (int n = 0; n < 500; n++)
             {
                 Node child = AddResourceChild(node);
@@ -67,10 +70,10 @@ namespace TestBomTreeView
             return true;
         }
 
-        private Node AddRoot(PPRNodeType type)
+        private Node AddPPRNode(Node woNode, PPRNodeType type)
         {
             Node node = new PPRNode(type);
-            this.Nodes.Add(node);
+			woNode.Nodes.Add(node);
             return node;
         }
 
